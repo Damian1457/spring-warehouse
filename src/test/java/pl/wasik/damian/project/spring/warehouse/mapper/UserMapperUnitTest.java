@@ -5,9 +5,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import pl.wasik.damian.project.spring.warehouse.repository.entity.AddressEntity;
+
 import pl.wasik.damian.project.spring.warehouse.repository.entity.UserEntity;
-import pl.wasik.damian.project.spring.warehouse.web.AddressDto;
-import pl.wasik.damian.project.spring.warehouse.web.UserDto;
+import pl.wasik.damian.project.spring.warehouse.web.model.AddressDto;
+import pl.wasik.damian.project.spring.warehouse.web.model.UserDto;
+
 
 import java.util.Collections;
 import java.util.List;

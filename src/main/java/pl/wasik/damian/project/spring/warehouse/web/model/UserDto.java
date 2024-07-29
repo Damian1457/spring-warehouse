@@ -1,5 +1,4 @@
-package pl.wasik.damian.project.spring.warehouse.web;
-
+package pl.wasik.damian.project.spring.warehouse.web.model;
 
 public class UserDto {
     private Long id;
@@ -7,7 +6,7 @@ public class UserDto {
     private String email;
     private String phoneNumber;
     private AddressDto address;
-    
+
     public UserDto() {
     }
 
