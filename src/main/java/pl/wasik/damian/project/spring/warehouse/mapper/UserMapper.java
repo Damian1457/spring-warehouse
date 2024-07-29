@@ -3,7 +3,7 @@ package pl.wasik.damian.project.spring.warehouse.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.wasik.damian.project.spring.warehouse.repository.entity.UserEntity;
-import pl.wasik.damian.project.spring.warehouse.web.UserDto;
+import pl.wasik.damian.project.spring.warehouse.web.model.UserDto;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,7 +24,9 @@ public class UserMapper {
     public UserDto toDto(UserEntity userEntity) {
         LOGGER.info("toDto(" + userEntity + ")");
         UserDto userDto = modelMapper.map(userEntity, UserDto.class);
-        userDto.setAddress(addressMapper.toDto(userEntity.getAddressEntity()));
+        if (userEntity.getAddressEntity() != null) {
+            userDto.setAddress(addressMapper.toDto(userEntity.getAddressEntity()));
+        }
         LOGGER.info("toDto(" + userDto + ")");
         return userDto;
     }
@@ -32,7 +34,9 @@ public class UserMapper {
     public UserEntity toEntity(UserDto userDto) {
         LOGGER.info("toEntity(" + userDto + ")");
         UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
-        userEntity.setAddressEntity(addressMapper.toEntity(userDto.getAddress()));
+        if (userDto.getAddress() != null) {
+            userEntity.setAddressEntity(addressMapper.toEntity(userDto.getAddress()));
+        }
         LOGGER.info("toEntity(" + userEntity + ")");
         return userEntity;
     }
