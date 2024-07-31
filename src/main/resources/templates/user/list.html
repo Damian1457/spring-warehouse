@@ -12,6 +12,7 @@
         <th>NIP</th>
         <th>Email</th>
         <th>Phone Number</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +21,17 @@
         <td th:text="${user.nip}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.phoneNumber}"></td>
+        <td>
+            <a th:href="@{/users/read/{id}(id=${user.id})}">
+                <button>View</button>
+            </a>
+            <a th:href="@{/users/update/{id}(id=${user.id})}">
+                <button>Update</button>
+            </a>
+            <form th:action="@{/users/delete/{id}(id=${user.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

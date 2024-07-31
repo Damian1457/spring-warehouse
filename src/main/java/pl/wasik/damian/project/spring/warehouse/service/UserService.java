@@ -23,6 +23,16 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
+    public List<UserDto> getAll() {
+        LOGGER.info("getAll()");
+        List<UserEntity> userEntities = userRepository.findAll();
+        List<UserDto> userDtos = userEntities.stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
+        LOGGER.info("getAll(...) = " + userDtos);
+        return userDtos;
+    }
+
     public UserDto create(UserDto userDto) {
         LOGGER.info("create(" + userDto + ")");
         UserEntity userEntity = userMapper.toEntity(userDto);
@@ -39,16 +49,6 @@ public class UserService {
         UserDto userDto = userMapper.toDto(userEntity);
         LOGGER.info("read(...) = " + userDto);
         return userDto;
-    }
-
-    public List<UserDto> getAll() {
-        LOGGER.info("getAll()");
-        List<UserEntity> userEntities = userRepository.findAll();
-        List<UserDto> userDtos = userEntities.stream()
-                .map(userMapper::toDto)
-                .collect(Collectors.toList());
-        LOGGER.info("getAll(...) = " + userDtos);
-        return userDtos;
     }
 
     public UserDto update(Long userId, UserDto userDto) {
