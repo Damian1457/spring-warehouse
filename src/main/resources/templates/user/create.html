@@ -7,14 +7,14 @@
 <h1>Create User</h1>
 <form action="#" th:action="@{/users/create}" th:object="${user}" method="post">
     <label for="nip">NIP:</label>
-    <input type="text" id="nip" th:field="*{nip}" />
-    <br/>
+    <input type="text" id="nip" th:field="*{nip}"/><br/>
+
     <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" />
-    <br/>
+    <input type="email" id="email" th:field="*{email}"/><br/>
+
     <label for="phoneNumber">Phone Number:</label>
-    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" />
-    <br/>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/><br/>
+
     <button type="submit">Create</button>
 </form>
 </body>
