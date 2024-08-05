@@ -11,10 +11,13 @@ import pl.wasik.damian.project.spring.warehouse.mapper.AddressMapper;
 import pl.wasik.damian.project.spring.warehouse.repository.AddressRepository;
 import pl.wasik.damian.project.spring.warehouse.repository.entity.AddressEntity;
 import pl.wasik.damian.project.spring.warehouse.web.model.AddressDto;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -133,8 +136,57 @@ public class AddressServiceUnitTest {
 
         // Then
         Assertions.assertAll(
-                () -> Assertions.assertNotNull(foundAddress, "Expected user to be present"),
-                () -> Assertions.assertEquals(addressDto, foundAddress, "Expected userDto to match the found userDto")
+                () -> Assertions.assertNotNull(foundAddress, "Expected address to be present"),
+                () -> Assertions.assertEquals(addressDto, foundAddress, "Expected addressDto to match the found addressDto")
         );
+    }
+
+    @Test
+    @DisplayName("Given AddressId and AddressDto When UpdateAddress Then Return Updated AddressDto")
+    void givenAddressId_whenUpdateAddress_thenReturnUpdatedAddressDto() {
+        // Given
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setId(ADDRESS_ID);
+        addressEntity.setStreet(STREET);
+        addressEntity.setCity(CITY);
+        addressEntity.setPostalCode(POSTAL_CODE);
+        addressEntity.setHouseNumber(HOUSE_NUMBER);
+
+        AddressDto addressDto = new AddressDto();
+        addressDto.setId(ADDRESS_ID);
+        addressDto.setStreet(STREET);
+        addressDto.setCity(CITY);
+        addressDto.setPostalCode(POSTAL_CODE);
+        addressDto.setHouseNumber(HOUSE_NUMBER);
+
+        when(addressMapper.toEntity(addressDto)).thenReturn(addressEntity);
+        when(addressRepository.save(addressEntity)).thenReturn(addressEntity);
+        when(addressMapper.toDto(addressEntity)).thenReturn(addressDto);
+
+        // When
+        AddressDto updatedAddress = addressService.update(ADDRESS_ID, addressDto);
+
+        // Then
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(updatedAddress, "Expected updated address to be not null"),
+                () -> Assertions.assertEquals(addressDto.getId(), updatedAddress.getId(), "Expected updated address ID to match"),
+                () -> Assertions.assertEquals(addressDto.getStreet(), updatedAddress.getStreet(), "Expected updated address Street to match"),
+                () -> Assertions.assertEquals(addressDto.getCity(), updatedAddress.getCity(), "Expected updated address City to match"),
+                () -> Assertions.assertEquals(addressDto.getPostalCode(), updatedAddress.getPostalCode(), "Expected updated address Postal Code to match"),
+                () -> Assertions.assertEquals(addressDto.getHouseNumber(), updatedAddress.getHouseNumber(), "Expected updated address House Number to match")
+        );
+    }
+
+    @Test
+    @DisplayName("Given AddressId When DeleteAddressById Then Verify Deletion")
+    void givenAddressId_whenDeleteAddressById_thenVerifyDeletion() {
+        // Given
+        Long addressIdToDelete = ADDRESS_ID;
+
+        // When
+        addressService.delete(addressIdToDelete);
+
+        // Then
+        verify(addressRepository).deleteById(addressIdToDelete);
     }
 }

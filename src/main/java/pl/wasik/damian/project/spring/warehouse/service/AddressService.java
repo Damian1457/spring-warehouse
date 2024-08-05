@@ -49,4 +49,20 @@ public class AddressService {
         LOGGER.info("read(...) = " + addressDto);
         return addressDto;
     }
+
+    public AddressDto update(Long addressId, AddressDto addressDto) {
+        LOGGER.info("update(" + addressId + ", " + addressDto + ")");
+        AddressEntity addressEntity = addressMapper.toEntity(addressDto);
+        addressEntity.setId(addressId);
+        AddressEntity updatedAddressEntity = addressRepository.save(addressEntity);
+        AddressDto updatedAddressDto = addressMapper.toDto(updatedAddressEntity);
+        LOGGER.info("update(...) = " + updatedAddressDto);
+        return updatedAddressDto;
+    }
+
+    public void delete(Long addressId) {
+        LOGGER.info("delete(" + addressId + ")");
+        addressRepository.deleteById(addressId);
+        LOGGER.info("delete(...)");
+    }
 }
