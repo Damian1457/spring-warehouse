@@ -16,6 +16,7 @@ import pl.wasik.damian.project.spring.warehouse.web.model.UserDto;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,10 @@ class UserServiceUnitTest {
         // Then
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(createdUser, "Expected created user to be not null"),
-                () -> Assertions.assertEquals(userDto, createdUser, "Expected created user to match the input userDto")
+                () -> Assertions.assertEquals(USER_ID, createdUser.getId()),
+                () -> Assertions.assertEquals(NIP, createdUser.getNip()),
+                () -> Assertions.assertEquals(EMAIL, createdUser.getEmail()),
+                () -> Assertions.assertEquals(PHONE_NUMBER, createdUser.getPhoneNumber())
         );
     }
 
@@ -118,7 +122,7 @@ class UserServiceUnitTest {
         List<UserDto> userDtos = Collections.singletonList(userDto);
 
         when(userRepository.findAll()).thenReturn(userEntities);
-        when(userMapper.toDto(any(UserEntity.class))).thenReturn(userDto);
+        when(userMapper.toDto(userEntity)).thenReturn(userDto);
 
         // When
         List<UserDto> foundUsers = userService.getAll();
@@ -161,8 +165,8 @@ class UserServiceUnitTest {
         userDto.setPhoneNumber(PHONE_NUMBER);
 
         when(userMapper.toEntity(userDto)).thenReturn(userEntity);
-        when(userRepository.save(any(UserEntity.class))).thenReturn(userEntity);
-        when(userMapper.toDto(any(UserEntity.class))).thenReturn(userDto);
+        when(userRepository.save(userEntity)).thenReturn(userEntity);
+        when(userMapper.toDto(userEntity)).thenReturn(userDto);
 
         // When
         UserDto updatedUser = userService.update(USER_ID, userDto);
@@ -170,7 +174,10 @@ class UserServiceUnitTest {
         // Then
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(updatedUser, "Expected updated user to be not null"),
-                () -> Assertions.assertEquals(userDto, updatedUser, "Expected updated user to match the input userDto")
+                () -> Assertions.assertEquals(userDto.getId(), updatedUser.getId(), "Expected updated user ID to match"),
+                () -> Assertions.assertEquals(userDto.getNip(), updatedUser.getNip(), "Expected updated user NIP to match"),
+                () -> Assertions.assertEquals(userDto.getEmail(), updatedUser.getEmail(), "Expected updated user email to match"),
+                () -> Assertions.assertEquals(userDto.getPhoneNumber(), updatedUser.getPhoneNumber(), "Expected updated user phone number to match")
         );
     }
 }
