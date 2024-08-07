@@ -22,7 +22,23 @@
         <th>Phone Number</th>
         <td th:text="${user.phoneNumber}"></td>
     </tr>
+    <tr>
+        <th>Street</th>
+        <td th:text="${user.address?.street}"></td>
+    </tr>
+    <tr>
+        <th>City</th>
+        <td th:text="${user.address?.city}"></td>
+    </tr>
+    <tr>
+        <th>Postal Code</th>
+        <td th:text="${user.address?.postalCode}"></td>
+    </tr>
+    <tr>
+        <th>House Number</th>
+        <td th:text="${user.address?.houseNumber}"></td>
+    </tr>
 </table>
-<a th:href="@{/users}">Back to List</a>
+<a th:href="@{/users}"><button>Back to List</button></a>
 </body>
 </html>

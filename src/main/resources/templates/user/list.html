@@ -12,6 +12,10 @@
         <th>NIP</th>
         <th>Email</th>
         <th>Phone Number</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Postal Code</th>
+        <th>House Number</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -21,6 +25,10 @@
         <td th:text="${user.nip}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.address?.street}"></td>
+        <td th:text="${user.address?.city}"></td>
+        <td th:text="${user.address?.postalCode}"></td>
+        <td th:text="${user.address?.houseNumber}"></td>
         <td>
             <a th:href="@{/users/read/{id}(id=${user.id})}">
                 <button>View</button>
@@ -35,6 +43,6 @@
     </tr>
     </tbody>
 </table>
-<a th:href="@{/users/create}">Add New User</a>
+<a th:href="@{/users/create}"><button>Add New User</button></a>
 </body>
 </html>

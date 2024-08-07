@@ -21,7 +21,7 @@ public class AddressEntity {
     private String houseNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userEntity_id")
+    @JoinColumn(name = "user_entity_id")
     private UserEntity userEntity;
 
     public AddressEntity() {
@@ -83,7 +83,6 @@ public class AddressEntity {
                 ", city='" + city + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
-                ", userEntity=" + userEntity +
                 '}';
     }
 }

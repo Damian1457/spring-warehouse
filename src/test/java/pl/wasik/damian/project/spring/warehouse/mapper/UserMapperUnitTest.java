@@ -5,15 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import pl.wasik.damian.project.spring.warehouse.repository.entity.AddressEntity;
-
 import pl.wasik.damian.project.spring.warehouse.repository.entity.UserEntity;
 import pl.wasik.damian.project.spring.warehouse.web.model.AddressDto;
 import pl.wasik.damian.project.spring.warehouse.web.model.UserDto;
 
-
 import java.util.Collections;
 import java.util.List;
-
 
 @DisplayName("UserMapper Unit Test")
 class UserMapperUnitTest {
@@ -106,7 +103,8 @@ class UserMapperUnitTest {
                 () -> Assertions.assertEquals(STREET, userEntity.getAddressEntity().getStreet(), "Street should match"),
                 () -> Assertions.assertEquals(CITY, userEntity.getAddressEntity().getCity(), "City should match"),
                 () -> Assertions.assertEquals(POSTAL_CODE, userEntity.getAddressEntity().getPostalCode(), "PostalCode should match"),
-                () -> Assertions.assertEquals(HOUSE_NUMBER, userEntity.getAddressEntity().getHouseNumber(), "HouseNumber should match")
+                () -> Assertions.assertEquals(HOUSE_NUMBER, userEntity.getAddressEntity().getHouseNumber(), "HouseNumber should match"),
+                () -> Assertions.assertEquals(userEntity, userEntity.getAddressEntity().getUserEntity(), "UserEntity should match in AddressEntity")
         );
     }
 
@@ -131,10 +129,9 @@ class UserMapperUnitTest {
         userEntity.setEmail(EMAIL);
         userEntity.setPhoneNumber(PHONE_NUMBER);
         userEntity.setAddressEntity(addressEntity);
-
-        List<UserEntity> userEntities = Collections.singletonList(userEntity);
-
+        
         // When
+        List<UserEntity> userEntities = Collections.singletonList(userEntity);
         List<UserDto> userDtos = userMapper.toDtoList(userEntities);
 
         // Then
@@ -176,9 +173,8 @@ class UserMapperUnitTest {
         userDto.setPhoneNumber(PHONE_NUMBER);
         userDto.setAddress(addressDto);
 
-        List<UserDto> userDtos = Collections.singletonList(userDto);
-
         // When
+        List<UserDto> userDtos = Collections.singletonList(userDto);
         List<UserEntity> userEntities = userMapper.toEntityList(userDtos);
 
         // Then
@@ -194,7 +190,8 @@ class UserMapperUnitTest {
                 () -> Assertions.assertEquals(STREET, userEntities.get(0).getAddressEntity().getStreet(), "Street should match"),
                 () -> Assertions.assertEquals(CITY, userEntities.get(0).getAddressEntity().getCity(), "City should match"),
                 () -> Assertions.assertEquals(POSTAL_CODE, userEntities.get(0).getAddressEntity().getPostalCode(), "PostalCode should match"),
-                () -> Assertions.assertEquals(HOUSE_NUMBER, userEntities.get(0).getAddressEntity().getHouseNumber(), "HouseNumber should match")
+                () -> Assertions.assertEquals(HOUSE_NUMBER, userEntities.get(0).getAddressEntity().getHouseNumber(), "HouseNumber should match"),
+                () -> Assertions.assertEquals(userEntities.get(0), userEntities.get(0).getAddressEntity().getUserEntity(), "UserEntity should be set in AddressEntity")
         );
     }
 }
