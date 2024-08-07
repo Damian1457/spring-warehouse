@@ -53,9 +53,15 @@ public class UserService {
 
     public UserDto update(Long userId, UserDto userDto) {
         LOGGER.info("update(" + userId + ", " + userDto + ")");
-        UserEntity userEntity = userMapper.toEntity(userDto);
-        userEntity.setId(userId);
-        UserEntity updatedUserEntity = userRepository.save(userEntity);
+        UserEntity existingUserEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        UserEntity userEntityToUpdate = userMapper.toEntity(userDto);
+        userEntityToUpdate.setId(userId);
+        if (existingUserEntity.getAddressEntity() != null) {
+            userEntityToUpdate.getAddressEntity().setId(existingUserEntity.getAddressEntity().getId());
+            userEntityToUpdate.getAddressEntity().setUserEntity(userEntityToUpdate);
+        }
+        UserEntity updatedUserEntity = userRepository.save(userEntityToUpdate);
         UserDto updatedUserDto = userMapper.toDto(updatedUserEntity);
         LOGGER.info("update(...) = " + updatedUserDto);
         return updatedUserDto;

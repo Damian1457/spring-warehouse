@@ -2,6 +2,7 @@ package pl.wasik.damian.project.spring.warehouse.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import pl.wasik.damian.project.spring.warehouse.repository.entity.AddressEntity;
 import pl.wasik.damian.project.spring.warehouse.repository.entity.UserEntity;
 import pl.wasik.damian.project.spring.warehouse.web.model.UserDto;
 
@@ -35,7 +36,12 @@ public class UserMapper {
         LOGGER.info("toEntity(" + userDto + ")");
         UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
         if (userDto.getAddress() != null) {
-            userEntity.setAddressEntity(addressMapper.toEntity(userDto.getAddress()));
+            AddressEntity addressEntity = addressMapper.toEntity(userDto.getAddress());
+            if (userEntity.getId() != null && userEntity.getAddressEntity() != null) {
+                addressEntity.setId(userEntity.getAddressEntity().getId());
+            }
+            addressEntity.setUserEntity(userEntity);
+            userEntity.setAddressEntity(addressEntity);
         }
         LOGGER.info("toEntity(" + userEntity + ")");
         return userEntity;

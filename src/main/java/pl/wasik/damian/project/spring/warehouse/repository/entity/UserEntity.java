@@ -73,7 +73,7 @@ public class UserEntity {
                 ", nip='" + nip + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", addressEntity=" + addressEntity +
+                ", addressEntityId=" + (addressEntity != null ? addressEntity.getId() : null) +
                 '}';
     }
 }

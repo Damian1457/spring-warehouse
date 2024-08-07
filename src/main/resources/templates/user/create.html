@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create User</title>
+    <title>Create User with Address</title>
 </head>
 <body>
-<h1>Create User</h1>
+<h1>Create User with Address</h1>
 <form action="#" th:action="@{/users/create}" th:object="${user}" method="post">
+
+    <!-- User fields -->
     <label for="nip">NIP:</label>
     <input type="text" id="nip" th:field="*{nip}"/><br/>
 
@@ -14,6 +16,18 @@
 
     <label for="phoneNumber">Phone Number:</label>
     <input type="text" id="phoneNumber" th:field="*{phoneNumber}"/><br/>
+
+    <label for="street">Street:</label>
+    <input type="text" id="street" th:field="*{address.street}"/><br/>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{address.city}"/><br/>
+
+    <label for="postalCode">Postal Code:</label>
+    <input type="text" id="postalCode" th:field="*{address.postalCode}"/><br/>
+
+    <label for="houseNumber">House Number:</label>
+    <input type="text" id="houseNumber" th:field="*{address.houseNumber}"/><br/>
 
     <button type="submit">Create</button>
 </form>
