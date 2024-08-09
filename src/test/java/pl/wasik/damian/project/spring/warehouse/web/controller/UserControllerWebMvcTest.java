@@ -44,9 +44,9 @@ public class UserControllerWebMvcTest {
                 new UserDto(1L, "1234567890", "user1@example.com", "123456789", null),
                 new UserDto(2L, "0987654321", "user2@example.com", "987654321", null)
         );
-        when(userService.getAll()).thenReturn(users);
 
         // When & Then
+        when(userService.getAll()).thenReturn(users);
         mockMvc.perform(get("/users"))
                 .andDo(print())
                 .andExpect(status().isOk())

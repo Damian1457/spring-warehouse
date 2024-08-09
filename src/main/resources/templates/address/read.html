@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Details</title>
+</head>
+<body>
+<h1>Address Details</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <td th:text="${address.id}"></td>
+    </tr>
+    <tr>
+        <th>Street</th>
+        <td th:text="${address.street}"></td>
+    </tr>
+    <tr>
+        <th>City</th>
+        <td th:text="${address.city}"></td>
+    </tr>
+    <tr>
+        <th>Postal Code</th>
+        <td th:text="${address.postalCode}"></td>
+    </tr>
+    <tr>
+        <th>House Number</th>
+        <td th:text="${address.houseNumber}"></td>
+    </tr>
+</table>
+<a th:href="@{/addresses}">
+    <button>Back To List</button>
+</a>
+</body>
+</html>

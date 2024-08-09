@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Address</title>
+</head>
+<body>
+<h1>Update Address</h1>
+<form th:action="@{/addresses/update/{id}(id=${address.id})}" th:object="${address}" method="post">
+    <label for="street">Street:</label>
+    <input type="text" id="street" name="street" th:field="*{street}"/><br/>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" th:field="*{city}"/><br/>
+
+    <label for="postalCode">Postal Code:</label>
+    <input type="text" id="postalCode" name="postalCode" th:field="*{postalCode}"/><br/>
+
+    <label for="houseNumber">House Number:</label>
+    <input type="text" id="houseNumber" name="houseNumber" th:field="*{houseNumber}"/><br/>
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
