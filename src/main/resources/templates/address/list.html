@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Address List</title>
+</head>
+<body>
+<h1>Address List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Postal Code</th>
+        <th>House Number</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="address : ${addresses}">
+        <td th:text="${address.id}"></td>
+        <td th:text="${address.street}"></td>
+        <td th:text="${address.city}"></td>
+        <td th:text="${address.postalCode}"></td>
+        <td th:text="${address.houseNumber}"></td>
+        <td>
+            <a th:href="@{/addresses/read/{id}(id=${address.id})}">
+                <button>View</button>
+            </a>
+            <a th:href="@{/addresses/update/{id}(id=${address.id})}">
+                <button>Update</button>
+            </a>
+            <form th:action="@{/addresses/delete/{id}(id=${address.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/addresses/create}">
+    <button>Add New Address</button>
+</a>
+</body>
+</html>

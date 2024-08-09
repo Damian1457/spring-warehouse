@@ -69,8 +69,8 @@ public class UserController {
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id, @ModelAttribute UserDto userDto) {
         LOGGER.info("update(" + id + ", " + userDto + ")");
-        UserDto updated = userService.update(id, userDto);
-        LOGGER.info("update(...) = " + updated);
+        UserDto updatedUser = userService.update(id, userDto);
+        LOGGER.info("update(...) = " + updatedUser);
         return "redirect:/users";
     }
 
