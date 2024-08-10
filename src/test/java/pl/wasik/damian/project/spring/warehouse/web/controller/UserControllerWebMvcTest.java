@@ -71,9 +71,9 @@ public class UserControllerWebMvcTest {
     void givenUserData_whenCreate_thenRedirectToUsers() throws Exception {
         // Given
         UserDto userDto = new UserDto(1L, "1234567890", "test@example.com", "123456789", null);
-        when(userService.create(any(UserDto.class))).thenReturn(userDto);
 
         // When & Then
+        when(userService.create(any(UserDto.class))).thenReturn(userDto);
         mockMvc.perform(post("/users/create")
                         .param("nip", "1234567890")
                         .param("email", "test@example.com")
@@ -90,9 +90,9 @@ public class UserControllerWebMvcTest {
     public void givenUserId_whenRead_thenReturnsReadView() throws Exception {
         // Given
         UserDto userDto = new UserDto(1L, "1234567890", "test@example.com", "123456789", null);
-        when(userService.read(anyLong())).thenReturn(userDto);
 
         // When & Then
+        when(userService.read(anyLong())).thenReturn(userDto);
         mockMvc.perform(get("/users/read/{id}", 1L))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -106,9 +106,9 @@ public class UserControllerWebMvcTest {
     void givenUserId_whenUpdateView_thenReturnsUpdateView() throws Exception {
         // Given
         UserDto userDto = new UserDto(1L, "1234567890", "test@example.com", "123456789", null);
-        when(userService.read(anyLong())).thenReturn(userDto);
 
         // When & Then
+        when(userService.read(anyLong())).thenReturn(userDto);
         mockMvc.perform(get("/users/update/{id}", 1L))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -122,9 +122,9 @@ public class UserControllerWebMvcTest {
     void givenUserData_whenUpdate_thenRedirectToUsers() throws Exception {
         // Given
         UserDto userDto = new UserDto(1L, "1234567890", "test@example.com", "123456789", null);
-        when(userService.update(anyLong(), any(UserDto.class))).thenReturn(userDto);
 
         // When & Then
+        when(userService.update(anyLong(), any(UserDto.class))).thenReturn(userDto);
         mockMvc.perform(post("/users/update/{id}", 1L)
                         .param("id", "1")
                         .param("nip", "1234567890")
