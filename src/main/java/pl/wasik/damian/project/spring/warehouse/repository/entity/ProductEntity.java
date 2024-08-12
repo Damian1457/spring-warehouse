@@ -28,14 +28,13 @@ public class ProductEntity {
     @Lob
     private byte[] image;
 
-    @ManyToMany(mappedBy = "products")
-    private Set<CartEntity> carts;
+    @ManyToMany(mappedBy = "productEntities")
+    private Set<CartEntity> cartEntities;
 
-    @OneToMany(mappedBy = "product")
-    private Set<OrderItemEntity> orderItems;
+    @OneToMany(mappedBy = "productEntity")
+    private Set<OrderItemEntity> orderItemEntities;
 
-    public ProductEntity() {
-    }
+    public ProductEntity() {}
 
     public Long getId() {
         return id;
@@ -93,19 +92,19 @@ public class ProductEntity {
         this.image = image;
     }
 
-    public Set<CartEntity> getCarts() {
-        return carts;
+    public Set<CartEntity> getCartEntities() {
+        return cartEntities;
     }
 
-    public void setCarts(Set<CartEntity> carts) {
-        this.carts = carts;
+    public void setCartEntities(Set<CartEntity> cartEntities) {
+        this.cartEntities = cartEntities;
     }
 
-    public Set<OrderItemEntity> getOrderItems() {
-        return orderItems;
+    public Set<OrderItemEntity> getOrderItemEntities() {
+        return orderItemEntities;
     }
 
-    public void setOrderItems(Set<OrderItemEntity> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderItemEntities(Set<OrderItemEntity> orderItemEntities) {
+        this.orderItemEntities = orderItemEntities;
     }
 }

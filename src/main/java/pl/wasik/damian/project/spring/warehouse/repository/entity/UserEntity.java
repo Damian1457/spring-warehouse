@@ -23,6 +23,9 @@ public class UserEntity {
     @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressEntity addressEntity;
 
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private CartEntity cartEntity;
+
     public UserEntity() {
     }
 
@@ -64,6 +67,14 @@ public class UserEntity {
 
     public void setAddressEntity(AddressEntity addressEntity) {
         this.addressEntity = addressEntity;
+    }
+
+    public CartEntity getCartEntity() {
+        return cartEntity;
+    }
+
+    public void setCartEntity(CartEntity cartEntity) {
+        this.cartEntity = cartEntity;
     }
 
     @Override
