@@ -2,6 +2,7 @@ package pl.wasik.damian.project.spring.warehouse.repository.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,7 +29,7 @@ public class OrderEntity {
 
     private LocalDateTime orderDate;
 
-    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<OrderItemEntity> orderItemEntities = new HashSet<>();
 
     private String status;
@@ -37,9 +38,8 @@ public class OrderEntity {
     @JoinColumn(name = "address_entity_id")
     private AddressEntity deliveryAddressEntity;
 
-    public OrderEntity() {}
-
-    // Gettery i settery
+    public OrderEntity() {
+    }
 
     public Long getId() {
         return id;

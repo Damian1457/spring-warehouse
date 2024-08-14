@@ -30,8 +30,6 @@ public class OrderItemEntity {
     public OrderItemEntity() {
     }
 
-    // Gettery i settery
-
     public Long getId() {
         return id;
     }
