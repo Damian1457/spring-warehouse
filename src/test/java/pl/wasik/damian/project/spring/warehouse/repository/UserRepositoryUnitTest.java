@@ -9,8 +9,12 @@ import pl.wasik.damian.project.spring.warehouse.repository.entity.UserEntity;
 
 @SpringBootTest
 @DisplayName("User Repository Unit Test")
-class UserRepositoryUnitTest {
+public class UserRepositoryUnitTest {
 
+    public static final String TEST_NIP = "91103108331";
+    public static final String TEST_EMAIL = "Test@Email";
+    public static final String TEST_NUMBER = "7309814848";
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -19,14 +23,14 @@ class UserRepositoryUnitTest {
     void givenUserRepository_whenAddUser_thenUserIsSaved() {
         // Given
         UserEntity userEntity = new UserEntity();
-        userEntity.setNip("91103108331");
-        userEntity.setEmail("Test@Email");
-        userEntity.setPhoneNumber("730981484");
+        userEntity.setNip(TEST_NIP);
+        userEntity.setEmail(TEST_EMAIL);
+        userEntity.setPhoneNumber(TEST_NUMBER);
 
         // When
         UserEntity savedUser = userRepository.save(userEntity);
 
         //Then
-        Assertions.assertNotNull(savedUser, "The user has not been saved.");
+        Assertions.assertNotNull(savedUser, "The user has not been saved");
     }
 }
