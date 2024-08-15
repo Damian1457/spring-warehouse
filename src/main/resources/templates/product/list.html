@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<h1>Product List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Capacity</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.stock}"></td>
+        <td th:text="${product.capacity}"></td>
+        <td th:text="${product.description}"></td>
+        <td>
+            <img th:src="'data:image/jpeg;base64,' + ${product.imageBase64}" alt="Product Image"
+                 style="width: 100px; height: auto;">
+        </td>
+        <td>
+            <a th:href="@{/products/{id}(id=${product.id})}">
+                <button>View</button>
+            </a>
+            <a th:href="@{/products/update/{id}(id=${product.id})}">
+                <button>Update</button>
+            </a>
+            <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/products/create}">
+    <button>Add New Product</button>
+</a>
+</body>
+</html>

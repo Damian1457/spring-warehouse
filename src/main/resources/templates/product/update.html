@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+</head>
+<body>
+<h1>Update Product</h1>
+
+<form th:action="@{/products/update/{id}(id=${product.id})}" th:object="${product}" method="post"
+      enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Name: <input type="text" th:field="*{name}"/></label><br/>
+    <label>Price: <input type="text" th:field="*{price}"/></label><br/>
+    <label>Stock: <input type="text" th:field="*{stock}"/></label><br/>
+    <label>Capacity: <input type="text" th:field="*{capacity}"/></label><br/>
+    <label>Description: <textarea th:field="*{description}"></textarea></label><br/>
+    <label>Image: <input type="file" name="image"/></label><br/>
+    <button type="submit">Update</button>
+</form>
+
+<a th:href="@{/products}">Back to Product List</a>
+
+</body>
+</html>
